@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <a class="navbar-brand" href="#">Бібліотека:</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav" id="navTabs">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#" data-target="#booksSection">Книги</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#visitorsSection">Відвідувачі</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#cardsSection">Картки</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#statisticsSection">Статистика</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="booksSection" class="section">
+         <div class="container-box">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <h2>Книги</h2>
+                <button class="btn btn-outline-success mb-2 btn-img-hover" data-toggle="modal" data-target="#bookModal">
+                    <img src="image/add_icon.png" alt="Додати книгу" style="vertical-align: middle;">
+                    Додати книгу
+                </button>
+            </div>
+            <hr>
+            <div class="d-flex mb-2">
+                <img src="image/filter_icon.png" alt="Пошук" class="search-icon">
+                <select class="form-control mr-2" id="sortBooks">
+                    <option value="title">Назва</option>
+                    <option value="author">Автор</option>
+                    <option value="year">Рік</option>
+                    <option value="publisher">Видавництво</option>
+                    <option value="pages">Кількість сторінок</option>
+                    <option value="copies">Кількість примірників</option>
+                </select>
+                <img src="image/search.png" alt="Фільтр" class="filter-icon" >
+                <input type="text" class="form-control" id="searchBooks" placeholder="Пошук книг...">
+            </div>
+        </div>
+        <hr>
+        <table class="table" id="booksTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Автор</th>
+                <th>Рік</th>
+                <th>Видавництво</th>
+                <th>Кількість сторінок</th>
+                <th>Кількість примірників</th>
+                <th>Дії</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="visitorsSection" class="section">
+        <div class="container-box">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <h2>Відвідувачі</h2>
+                <button class="btn btn-outline-success btn-img-hover" data-toggle="modal" data-target="#visitorModal">
+                    <img src="image/add_icon.png" alt="Додати відвідувача" style="vertical-align: middle;">
+                    Додати відвідувача
+                </button>
+            </div>
+            <hr>
+            <div class="d-flex mb-2">
+                <img src="image/filter_icon.png" alt="Пошук" class="search-icon">
+                <select class="form-control mr-2" id="sortVisitors">
+                    <option value="name">ПІБ</option>
+                    <option value="phone">Телефон</option>
+                </select>
+                <img src="image/search.png" alt="Фільтр" class="filter-icon" >
+                <input type="text" class="form-control" id="searchVisitors" placeholder="Пошук відвідувачів...">
+            </div>
+        </div>
+        <hr>
+        <table class="table" id="visitorsTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>ПІБ</th>
+                <th>Телефон</th>
+                <th>Дії</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="cardsSection" class="section">
+         <div class="container-box">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <h2>Картки</h2>
+                <button class="btn btn-outline-success mb-2 btn-img-hover" data-toggle="modal" data-target="#cardModal">
+                    <img src="image/add_icon.png" alt="Видати книгу" style="vertical-align: middle;">
+                    Видати книгу
+                </button>
+            </div>
+            <hr>
+             <div class="d-flex mb-2">
+                 <img src="image/search.png" alt="Пошук" class="search-icon">
+                 <select class="form-control mr-2" id="sortCards">
+                     <option value="id">ID</option>
+                     <option value="visitorId">ID відвідувача</option>
+                     <option value="bookId">ID книги</option>
+                     <option value="issueDate">Дата видачі</option>
+                     <option value="returnDate">Дата повернення</option>
+                 </select>
+                 <img src="image/filter_icon.png" alt="Фільтр" class="filter-icon">
+                 <input type="text" class="form-control" id="searchCards" placeholder="Пошук карточок...">
+             </div>
+        </div>
+        <hr>
+        <table class="table" id="cardsTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID відвідувача</th>
+                <th>ID книги</th>
+                <th>Дата видачі</th>
+                <th>Дата повернення</th>
+                <th>Дії</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+
+    <div id="statisticsSection" class="section">
+        <div class="container-box">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <h2>Статистика</h2>
+                <button class="btn btn-outline-success" id="statisticsButton">Показати статистику</button>
+            </div>
+        </div>
+        <hr>
+        <div class="statistics-tables">
+            <div class="table-container">
+                <h3>5 найпопулярніших книг</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Назва книги</th>
+                        <th>Кількість видач</th>
+                    </tr>
+                    </thead>
+                    <tbody id="popularBooksList">
+                    <!-- Найпопулярніші книги будуть завантажуватися тут -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <h3>5 найактивніших відвідувачів</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Ім'я відвідувача</th>
+                        <th>Кількість видач</th>
+                    </tr>
+                    </thead>
+                    <tbody id="activeVisitorsList">
+                    <!-- Найактивніші відвідувачі будуть завантажуватися тут -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="bookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">Додати книгу</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="bookForm">
+                    <input type="hidden" id="bookId">
+                    <div class="form-group">
+                        <label for="bookTitle">Назва</label>
+                        <input type="text" class="form-control" id="bookTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookAuthor">Автор</label>
+                        <input type="text" class="form-control" id="bookAuthor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookYear">Рік</label>
+                        <input type="number" class="form-control" id="bookYear" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookPublisher">Видавництво</label>
+                        <input type="text" class="form-control" id="bookPublisher" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookPages">Кількість сторінок</label>
+                        <input type="number" class="form-control" id="bookPages" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookCopies">Кількість примірників</label>
+                        <input type="number" class="form-control" id="bookCopies" required>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="visitorModal" tabindex="-1" aria-labelledby="visitorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="visitorModalLabel">Додати відвідувача</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="visitorForm">
+                    <input type="hidden" id="visitorId">
+                    <div class="form-group">
+                        <label for="visitorName">ПІБ</label>
+                        <input type="text" class="form-control" id="visitorName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="visitorPhone">Телефон</label>
+                        <input type="text" class="form-control" id="visitorPhone" required pattern="[0-9\s\-]+">
+                    </div>
+                    <button type="submit" class="btn btn-outline-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cardModalLabel">Видати книгу</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="cardForm">
+                    <input type="hidden" id="cardId">
+                    <div class="form-group">
+                        <label for="cardVisitor">Відвідувач</label>
+                        <select class="form-control" id="cardVisitor" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardBook">Книга</label>
+                        <select class="form-control" id="cardBook" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardIssueDate">Дата видачі</label>
+                        <input type="date" class="form-control" id="cardIssueDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for User Information -->
+<div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="userInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userInfoModalLabel">Користувач</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- User Card -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title" id="userName"></h5>
+                        <p class="card-text"><strong>Телефон:</strong> <span id="userPhone"></span></p>
+                        <p class="card-text"><strong>ID:</strong> <span id="userId"></span></p>
+                    </div>
+                </div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#takenBooksTab">Взятi книги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#returnedBooksTab">Поверненi книги</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div id="takenBooksTab" class="tab-pane active">
+                        <table id="takenBooksTable" class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Назва</th>
+                                <th>Дата видачі</th>
+                                <th>Дата повернення</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Data here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="returnedBooksTab" class="tab-pane">
+                        <table id="returnedBooksTable" class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Назва</th>
+                                <th>Дата видачі</th>
+                                <th>Дата повернення</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Data here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Book Information -->
+<div class="modal fade" id="bookInfoModal" tabindex="-2" role="dialog" aria-labelledby="bookInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookInfoModalLabel">Iнформацiя про книгу</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Book Card -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title" id="bookTitle_info"></h5>
+                        <p class="card-text"><strong>Автор:</strong> <span id="bookAuthor_info"></span></p>
+                        <p class="card-text"><strong>Рiк:</strong> <span id="bookYear_info"></span></p>
+                        <p class="card-text"><strong>Видавництво:</strong> <span id="bookPublisher_info"></span></p>
+                        <p class="card-text"><strong>Кількість сторінок:</strong> <span id="bookPages_info"></span></p>
+                        <p class="card-text"><strong>ID:</strong> <span id="bookId_info"></span></p>
+                    </div>
+                </div>
+                <table id="bookUsersTable" class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ПІБ</th>
+                        <th>Дата видачі</th>
+                        <th>Дата повернення</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Data here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
